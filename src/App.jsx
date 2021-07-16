@@ -8,6 +8,7 @@ const App = () => {
   const [ persons, setPersons ] = useState( [] )
   const [ newName, setNewName ] = useState( '' )
   const [ newLastName, setNewLastName ] = useState( '' )
+  const [ passId, setPassId ] = useState( 0 )
   const [ btnState, setBtnState ] = useState( true )
 
   const getPersons = () => {
@@ -29,15 +30,16 @@ const App = () => {
       last_name: newLastName
     }
 
-    if ( btnState === false ) {
-      if ( window.confirm( `Are you sure to update ${ newName }` ) ) {
-        //updatePerson( event.data, personObject )
-        
-      } 
-    } else {
-      addPerson( personObject )
-    }
-
+    persons.forEach( person => {
+      if ( person.id === passId ) {
+        if ( window.confirm( `Are you sure to update ${ newName }` ) ) {
+          updatePerson( person, personObject )
+          setBtnState( true )
+        }         
+      } else {
+        addPerson( personObject )
+      }
+    } )
   }
 
   const addPerson = personObject => {
@@ -79,7 +81,7 @@ const App = () => {
     setBtnState( !btnState )
     setNewName( person.name )
     setNewLastName( person.last_name )
-    console.log('person :>> ', person);
+    setPassId( person.id )
   }
 
   const handleInputName = event => {
