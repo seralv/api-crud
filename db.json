@@ -1,18 +1,13 @@
 {
   "persons": [
     {
-      "name": "Miranda",
-      "last_name": "River",
-      "id": 6
-    },
-    {
       "name": "Lorenzo",
       "last_name": "Flowers",
       "id": 8
     },
     {
       "name": "Montserrat",
-      "last_name": "Sandy",
+      "last_name": "Sanders",
       "id": 9
     },
     {
@@ -21,9 +16,14 @@
       "id": 10
     },
     {
-      "name": "Leonel",
-      "last_name": "Messi",
-      "id": 11
+      "name": "Manuel",
+      "last_name": "Mijares",
+      "id": 12
+    },
+    {
+      "name": "Luciano",
+      "last_name": "Pavarotti",
+      "id": 13
     }
   ]
 }

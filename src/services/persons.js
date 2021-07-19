@@ -20,12 +20,18 @@ const remove = async id => {
     return response.data
 }
 
+const removeAll = async () => {
+    const request = axios.delete( baseUrl )
+    const response = await request
+    return response.data
+}
+
 const update = async ( id, newObject ) => {
     const request = axios.put( `${ baseUrl }/${ id }`, newObject )
     const response = await request
     return response.data
 }
 
-const actions = { getAll, create, remove, update }
+const actions = { getAll, create, remove, update, removeAll }
 
 export default actions

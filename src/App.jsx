@@ -30,21 +30,18 @@ const App = () => {
       last_name: newLastName
     }
 
-    addPerson( personObject )
-
-    // persons.forEach( person => {
-    //   if ( person.id === passId ) {
-    //     if ( window.confirm( `Are you sure to update ${ newName }` ) ) {
-    //       updatePerson( person, personObject )
-    //       setBtnState( true )
-    //     }         
-    //   } else {
-    //     if ( btnState && person.id !== person ) {
-          
-    //     }
-    //     addPerson( personObject )
-    //   }
-    // } )
+    if ( btnState ) {
+      addPerson( personObject )
+    } else {
+      persons.forEach( person => {
+        if ( person.id === passId ) {
+          if ( window.confirm( `Are you sure to update ${ newName }` ) ) {
+            updatePerson( person, personObject )
+            setBtnState( true )
+          }
+        }
+      } )
+    }
   }
 
   const addPerson = personObject => {
@@ -66,6 +63,16 @@ const App = () => {
         .then( deletedPerson => {
           getPersons()
         } )
+    }
+  }
+
+  const removeAllPersons = () => {
+    if ( 'Are you sure to delete all persons' ) {
+      personService
+        .removeAll()
+        .then( initialPersons => {
+          setPersons( initialPersons )
+        } )      
     }
   }
 
@@ -130,10 +137,9 @@ const App = () => {
               variant = "contained"
               color = "primary"
               fullWidth
-              onClick = { btnState ? addPerson : updatePerson }
-            >
+              onClick = { addName }>
               { btnState ? 'Add new person' : 'Update person' }
-            </Button>  
+            </Button>
           </Grid>
         </Grid>
       </form>
@@ -163,7 +169,25 @@ const App = () => {
               </TableBody>
             </Table>  
           </TableContainer>          
-        </Grid>        
+        </Grid>
+      </Grid>
+      <br/>
+      <Grid>
+        <Grid item xs = { 12 }>
+          {
+            persons.length > 0
+              ? <Button 
+                  className = "button"
+                  type = "submit"
+                  variant = "contained"
+                  color = "secondary"
+                  fullWidth
+                  onClick = { removeAllPersons }>
+                  Clear table
+                </Button>
+              : null
+          }          
+        </Grid>
       </Grid>
     </Container>
   )
