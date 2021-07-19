@@ -30,19 +30,25 @@ const App = () => {
       last_name: newLastName
     }
 
-    persons.forEach( person => {
-      if ( person.id === passId ) {
-        if ( window.confirm( `Are you sure to update ${ newName }` ) ) {
-          updatePerson( person, personObject )
-          setBtnState( true )
-        }         
-      } else {
-        addPerson( personObject )
-      }
-    } )
+    addPerson( personObject )
+
+    // persons.forEach( person => {
+    //   if ( person.id === passId ) {
+    //     if ( window.confirm( `Are you sure to update ${ newName }` ) ) {
+    //       updatePerson( person, personObject )
+    //       setBtnState( true )
+    //     }         
+    //   } else {
+    //     if ( btnState && person.id !== person ) {
+          
+    //     }
+    //     addPerson( personObject )
+    //   }
+    // } )
   }
 
   const addPerson = personObject => {
+    console.log('In addPerson :>> ');
     personService
       .create( personObject )
       .then( returnedPerson => {
@@ -64,6 +70,7 @@ const App = () => {
   }
 
   const updatePerson = ( person, personObject ) => {
+    console.log('In updatePerson :>> ');
     const personChanged = { ...person, name: newName, last_name: newLastName }
 
     personService
@@ -123,7 +130,7 @@ const App = () => {
               variant = "contained"
               color = "primary"
               fullWidth
-              onClick = { addName }
+              onClick = { btnState ? addPerson : updatePerson }
             >
               { btnState ? 'Add new person' : 'Update person' }
             </Button>  
