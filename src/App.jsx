@@ -67,12 +67,12 @@ const App = () => {
   }
 
   const removeAllPersons = () => {
-    if ( 'Are you sure to delete all persons' ) {
+    if ( window.confirm( 'Are you sure to delete all persons' ) ) {
       personService
         .removeAll()
         .then( initialPersons => {
           setPersons( initialPersons )
-        } )      
+        } )   
     }
   }
 
@@ -175,7 +175,7 @@ const App = () => {
       <Grid>
         <Grid item xs = { 12 }>
           {
-            persons.length > 0
+            persons.length === 50
               ? <Button 
                   className = "button"
                   type = "submit"
